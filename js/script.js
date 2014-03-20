@@ -15,6 +15,8 @@
 	//map-5ustxk97
 	//map-b5b1r7sg
 	//m.addLayer(mapbox.layer().id('nigeriaoil.nigeria-lga'));
+
+	console.log(getData());
 	
 	// Get data
 	function getData(map) {
@@ -24,6 +26,29 @@
 
 	// Build map
 	function mapData(f){ 
+
+
+
+//var markers = new mapbox.MarkerClusterGroup();
+
+    for (var i = 0; i < f.length; i++) {
+    	//console.log(f[i].properties.date);
+    	/*
+        var a = f[i];
+        var title = a[2];
+        var marker = L.marker(new L.LatLng(a[0], a[1]), {
+            icon: L.mapbox.marker.icon({'marker-symbol': 'post', 'marker-color': '0044FF'}),
+            title: title
+        });
+        marker.bindPopup(title);
+        markers.addLayer(marker);*/
+    }
+
+    //map.addLayer(markers);
+
+
+
+
 		
 		var markers = mapbox.markers.layer().features(f);       
 		//console.log(features)     
@@ -32,20 +57,12 @@
 		// Provide a function that returns html to be used in tooltip
 		var interaction = mapbox.markers.interaction(markers);
 		interaction.formatter(function(feature) {
-			if (feature.properties.verified == 'yes') {
-				var verifyClass = 'check-plus';
-				var verifyText = 'Verified by NOSDRA';
-			} else { 
-				var verifyClass = 'check-minus';
-				var verifyText = 'Not verified by NOSDRA';
-			}
-			console.log(feature.properties.verified)	
+	
 			var o = '<a target="_blank" href="https://docs.google.com/spreadsheet/ccc?key=0AozujDfh1xlMdFZtaWNxejcwX2htTFdBSlp5b09mNHc">'
 				+ '<div class="marker-title">Observed: ' + feature.properties.date + '</div>' 
 				+ '<div class="marker-description-top">Wind: ' + feature.properties.wind + ' Solar: ' + feature.properties.solar + '</div>';
 				//+ '<div class="marker-description-bottom"><span class="check ' + verifyClass + '"></span><span class="verify-text">' + verifyText + '</span></div></a>';
 			return o;
-			console.log(o)
 		});			
 		newMarker();
 	}

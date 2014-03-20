@@ -4,10 +4,10 @@ $(function(){
 
 
 $( "#windslider" ).slider({
-      value:25,
+        value: 2.5,
       min: 0,
-      max: 100,
-      step: 25,
+      max: 5,
+      step: 0.5,
       slide: function( event, ui ) {
         $( "#entry_788824438" ).val(  ui.value );
       }
@@ -17,10 +17,10 @@ $( "#windslider" ).slider({
 
 
 $( "#solarslider" ).slider({
-      value:25,
+value: 2.5,
       min: 0,
-      max: 100,
-      step: 25,
+      max: 5,
+      step: 0.5,
       slide: function( event, ui ) {
         $( "#entry_394802251" ).val(  ui.value );
       }
@@ -58,14 +58,17 @@ $( "#solarslider" ).slider({
     var now = new Date();
     now = now.getDate() + '/' + (now.getMonth()+1) + '/' +  now.getFullYear();
     $('#entry_284647925').val(now).datepicker({format:'dd/mm/yyyy'});
-    $('#entry_574205951').timepicker({
+    /*$('#entry_574205951').timepicker({
                 minuteStep: 1,
                 template: 'modal',
                 appendWidgetTo: 'body',
                 showSeconds: true,
                 showMeridian: false,
                 defaultTime: false
-            });
+            });*/
+
+
+//$('#entry_574205951').timepicker({minuteStep:1, template:'modal',appendWidgetTo:'body'});
     
 
     // Handle form submission
@@ -92,8 +95,9 @@ $( "#solarslider" ).slider({
                 //dataType: "jsonp",
                 complete: function() {
                     button.button('reset');
-                    //window.location = 'index.html#new';
-                    console.log(data);
+                    top.window.location = 'heatmap/index.html#new';
+
+                    //console.log(data);
                 }
    
                 
