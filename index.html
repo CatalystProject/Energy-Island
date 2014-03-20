@@ -71,6 +71,18 @@ var popupformcontent = '<iframe src="form.html" width=400px height=400px  frameB
 
 		var popup = L.popup();
 
+		
+		var tilleyIcon = L.icon({
+			iconUrl: 'img/tilleyicon.png',
+			shadowUrl: 'img/tilleyshadow.png',
+
+			iconSize:     [58, 93], // size of the icon
+			shadowSize:   [70, 38], // size of the shadow
+			iconAnchor:   [36, 92], // point of the icon which will correspond to marker's location
+			shadowAnchor: [53, 37],  // the same for the shadow
+			popupAnchor:  [0, -55] // point from which the popup should open relative to the iconAnchor
+		});
+		
 		function onMapClick(e) {
 
 			target_lat=56.535727438167584;
@@ -81,7 +93,7 @@ var popupformcontent = '<iframe src="form.html" width=400px height=400px  frameB
 						//popup.setLatLng(e.latlng).setContent("in").openOn(map);
             			//$('#entry_1672423225').val("in");
 
-            			L.marker([56.535727438167584, -6.756131332397456]).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
+            			L.marker([56.535727438167584, -6.756131332397456],{icon: tilleyIcon}).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
 			        }
 			        else { popup.setLatLng(e.latlng).setContent("<b>Tilley is not here!</b><br/> Try again!").openOn(map);
 			        //$('#entry_1672423225').val("out"); 

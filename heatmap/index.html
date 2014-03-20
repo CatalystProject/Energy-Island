@@ -3,15 +3,17 @@
 <head>
 	<title>Catalyst! onSupply Tiree Treasure Island</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
- <script src="tabletop.js"></script>
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
-	<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="http://leaflet.github.io/Leaflet.markercluster/example/screen.css" />
 
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+	<link rel="stylesheet" href="http://leaflet.github.io/Leaflet.markercluster/example/screen.css" />
 	<link rel="stylesheet" href="http://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.css" />
 	<link rel="stylesheet" href="http://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.Default.css" />
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+	<script src="tabletop.js"></script>
 	<script src="http://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
 <meta charset="utf-8" />
     <style>
@@ -21,13 +23,30 @@
       padding:0px;
       margin:0px;
    } 
+      #overlay {
+   padding: 10px;
+	bottom: 50px;
+    height: 95px;
+    position: absolute;
+    right: 50px;
+    width: 550px;
+	opacity:0.9;
+filter:alpha(opacity=90); /* For IE8 and earlier */
+background-color: white;
+		}
    </style>
    
 </head>
 <body>
 
 	<div id="map"></div>
-
+	<div id="overlay">
+	
+		<h2>Explore Energy Observations</h2>
+		There are not many observations because you have only been to one place. Once you have observed energy in more place an energy map will be made.
+		<br />You will get a clue to the next place to explore in your email soon.
+	
+	</div>
 	<script type="text/javascript">
 
 		var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/1D162E9F2DCA42C187DB33208932BFB6/997/256/{z}/{x}/{y}.png',
@@ -37,6 +56,19 @@
 
 		var map = L.map('map', {center: latlng, zoom: 12, layers: [cloudmade]});
 
+		var tilleyIcon = L.icon({
+			iconUrl: '../img/tilleyicon.png',
+			shadowUrl: '../img/tilleyshadow.png',
+
+			iconSize:     [58, 93], // size of the icon
+			shadowSize:   [70, 38], // size of the shadow
+			iconAnchor:   [36, 92], // point of the icon which will correspond to marker's location
+			shadowAnchor: [53, 37],  // the same for the shadow
+			popupAnchor:  [0, -55] // point from which the popup should open relative to the iconAnchor
+		});
+		L.marker([56.535727438167584, -6.756131332397456],{icon: tilleyIcon}).addTo(map).bindPopup("Tilley",{'maxWidth':900}).openPopup();
+		
+		
 		window.onload = function() { init() };
 
 		function init() {
