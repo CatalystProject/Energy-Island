@@ -4,7 +4,7 @@
 	<title>Catalyst! Energy Island</title>
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
    <style>
    html, body, #map {
       height:100%;
@@ -12,6 +12,17 @@
       padding:0px;
       margin:0px;
    } 
+   #overlay {
+   padding: 10px;
+	bottom: 50px;
+    height: 75px;
+    position: absolute;
+    right: 50px;
+    width: 550px;
+	opacity:0.9;
+filter:alpha(opacity=90); /* For IE8 and earlier */
+background-color: white;
+		}
    </style>
 
 
@@ -24,6 +35,14 @@
 <body>
 	<div id="map" ></div>
 
+	<div id="overlay">
+	
+		<h2>Find Tilley and Enter your Energy Observation!</h2>
+		Click the map where you think Tilley is located.
+		<br />Once you have found Tilley, enter your observation and click "Submit"
+	
+	</div>
+	
 	<script src="leaflet-0.7.2/leaflet.js"></script>
 	<script>
 var popupformcontent = '<iframe src="form.html" width=400px height=400px  frameBorder="0" ></iframe>';

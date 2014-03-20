@@ -54,7 +54,7 @@
 				var title = data[i].date;
 				var marker = L.marker(new L.LatLng(data[i].latitude, data[i].longitude), { title: title });
 				
-				marker.bindPopup('<div class="marker-title">Observed: ' +  data[i].date + ' '+data[i].time+'</div>' + '<div class="marker-description-top">Wind: ' +  data[i].windspeed + ' Solar: ' +  data[i].solarlevel + '</div>');
+				marker.bindPopup('<div class="marker-title"><b>Observed: ' +  data[i].date.substring(1) + ' '+data[i].time+'</b></div>' + '<div class="marker-description-top">Wind: ' +  data[i].windspeed + ' <br> Solar: ' +  data[i].solarlevel + '</div>');
 				markers.addLayer(marker);
 				
 				

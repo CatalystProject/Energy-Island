@@ -67,6 +67,9 @@ value: 2.5,
                 defaultTime: false
             });*/
 
+    $('#entry_574205951').timepicker({});
+
+
 
 //$('#entry_574205951').timepicker({minuteStep:1, template:'modal',appendWidgetTo:'body'});
     
