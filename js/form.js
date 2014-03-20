@@ -1,0 +1,170 @@
+$(function(){
+
+
+
+
+$( "#windslider" ).slider({
+      value:25,
+      min: 0,
+      max: 100,
+      step: 25,
+      slide: function( event, ui ) {
+        $( "#entry_788824438" ).val(  ui.value );
+      }
+    });
+    $( "#entry_788824438" ).val( $( "#windslider" ).slider( "value" ) );
+
+
+
+$( "#solarslider" ).slider({
+      value:25,
+      min: 0,
+      max: 100,
+      step: 25,
+      slide: function( event, ui ) {
+        $( "#entry_394802251" ).val(  ui.value );
+      }
+    });
+    $( "#entry_394802251" ).val( $( "#solarslider" ).slider( "value" ) );
+
+
+    var formUrl = 'https://docs.google.com/forms/d/1z1Jaif-HgxOMKROmNPXbRSVfSS0B-QCJbhM1RWWPwwo/formResponse';//'https://docs.google.com/a/developmentseed.org/spreadsheet/formResponse?formkey=dGdwaW1VUW5uY0FSMjF0RVZBVldLTUE6MQ';
+/*
+    // Set up map
+    var m = mapbox.map('map').addLayer(mapbox.layer().id('willsimm.hahfo0cc'));
+    m.centerzoom({ lat:56.5007, lon: -6.8805 }, 12);
+    //m.addLayer(mapbox.layer().id('nigeriaoil.nigeria-lga'));
+
+    // Set up map ui features with point selector
+    var ui = mapbox.ui().map(m).auto().pointselector(function(d) {
+        // Remove all points except the most recent
+        for (var i = 0; i < d.length - 1; i++) {
+            var locs = ui['_pointselector'].locations();
+            ui['_pointselector'].deleteLocation(locs[i]);
+        }
+        saveLatLon(d[0]);
+    });
+    */
+    
+    /*
+    m.on('click', function(e) {
+	alert(e.latlng);
+    });*/
+
+    // Get LGA data and set up LGA typeahead
+    //mapbox.converters.googledocs('0AoiGgH1LJtE0dGdwaW1VUW5uY0FSMjF0RVZBVldLTUE', 'od4', typeAhead);
+
+    // Set up date pickers
+    var now = new Date();
+    now = now.getDate() + '/' + (now.getMonth()+1) + '/' +  now.getFullYear();
+    $('#entry_284647925').val(now).datepicker({format:'dd/mm/yyyy'});
+    $('#entry_574205951').timepicker({
+                minuteStep: 1,
+                template: 'modal',
+                appendWidgetTo: 'body',
+                showSeconds: true,
+                showMeridian: false,
+                defaultTime: false
+            });
+    
+
+    // Handle form submission
+    $('form').submit(function(e) {
+        var button = $('input[type=submit]', this),
+            data = $(this).serialize();
+            console.log(data);
+
+        e.preventDefault();
+        if (validate($(this))) {
+            button.button('loading');
+            
+            
+          //  var googleForm = $(window).jqGoogleForms({"formKey": "1z1Jaif-HgxOMKROmNPXbRSVfSS0B-QCJbhM1RWWPwwo"});
+
+//googleForm.sendFormData(data);
+            
+            
+            
+            $.ajax({
+                type: 'POST',
+                url: formUrl,
+                data: data,
+                //dataType: "jsonp",
+                complete: function() {
+                    button.button('reset');
+                    //window.location = 'index.html#new';
+                    console.log(data);
+                }
+   
+                
+            });
+            //button.button('reset');
+        }
+
+        function validate(form) {
+            $('.control-group').removeClass('error');
+            $('input, textarea', form).each(function() {
+                var tag = $(this)[0].tagName.toLowerCase(),
+                    type = $(this).attr('type');
+
+                // Validate radio buttons
+                if (tag === 'input' && type === 'radio') {
+                    var name = $(this).attr('name');
+                    if ($('[name="' + name + '"]:checked').length < 1) {
+                        $(this).parent().parent().parent().addClass('error');
+                    }
+                }
+
+                // Validate text fields
+                if ((tag === 'input' && type === 'text') || tag === 'textarea') {
+                    if ($(this).val() === '' && !$(this).parent().hasClass('radio')) {
+                        $(this).parent().parent().addClass('error');
+                    }
+                }
+            });
+
+            if ($('.control-group.error').length < 1) return true;
+            $('.control-group.error').length
+            
+            $('html, body').animate({
+                scrollTop: $('.control-group.error').offset().top - 20
+            }, 500);
+
+            return false;
+        }
+    });
+
+    /*function typeAhead(features) {
+        var lgas = [];
+
+        // Pluck `LGA, state` values
+        for (var i = 0; i < features.length; i++) {
+            lgas.push(features[i].properties.lgastate);
+        }
+
+        $('#entry_0').typeahead({source: lgas}).change(function() {
+            var position = $.inArray($(this).val(), lgas);
+            if (position >= 0) {
+                var coords = features[position].geometry.coordinates,
+                    loc = { lon: coords[0], lat: coords[1] };
+
+                saveLatLon(loc);
+                m.center(loc).zoom(7);
+                $('#map-control').show();
+            }
+        });
+    }*/
+
+    function saveLatLon(loc) {
+        $('#entry_1672423225').val(loc.lon);
+        $('#entry_855548269').val(loc.lat);
+        target_lat=56.535727438167584;
+        target_lon=-6.756131332397456;
+        
+        if ((loc.lat >= (target_lat-0.003) && loc.lat <= (target_lat+0.003)) && (loc.lon >= (target_lon-0.003) && loc.lon <= (target_lon+0.003))) {
+            $('#entry_1672423225').val("in");
+        }
+        else { $('#entry_1672423225').val("out"); }
+
+    }
+});

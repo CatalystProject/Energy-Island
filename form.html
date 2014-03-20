@@ -1,0 +1,101 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset='utf-8'/>
+<title>Catalyst! onSupply Energy Discoverer</title>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Share:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css/mapbox.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="css/form.css">
+<link rel="stylesheet" href="http:////code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+
+</head>
+<body class="no-touch">
+
+<div id='form-layout'>
+    <h1>Submit a report</h1>
+	<form class="form-horizontal">
+    	<p class="help-block error">All fields are required.</p>
+
+						<input type="text" class="input-xlarge" id="entry_855548269" name="entry.855548269" value="56.535727438167584">
+						<input type="text" class="input-xlarge" name="entry.1672423225" id="entry_1672423225" value="-6.756131332397456">
+
+		<fieldset>
+			<legend>When were the readings taken?</legend>
+			<div class="control-group">
+				<label class="control-label" for="entry_284647925">Date observed</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" name="entry.284647925"  id="entry_284647925">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="entry_574205951">Time observed</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" name="entry.574205951" id="entry_574205951">
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend>Tell us the details</legend>
+			<div class="control-group">
+				<label class="control-label">Wind Power Observed</label>
+				<div class="controls">
+
+					<input type="text" class="input-xlarge" name="entry.788824438" id="entry_788824438">
+					<div id="windslider"></div>
+
+				</div>
+			</div>	
+			<div class="control-group">
+				<label class="control-label">Solar Power Observed</label>
+				<div class="controls">
+
+					<input type="text" class="input-xlarge" name="entry.394802251" id="entry_394802251">
+					<div id="solarslider"></div>
+
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="entry_666994148">Description</label>
+				<div class="controls">
+					<textarea class="input-xlarge" name="entry.666994148"  id="entry_666994148" ></textarea>
+					<p class="help-block">Describe the details of your observation</p>
+				</div>
+			</div>
+					
+		</fieldset>
+
+		<fieldset>
+			<legend>Tell us the password</legend>
+			<div class="control-group">
+				<label class="control-label" for="entry_1106057243">Password</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" name="entry.1106057243"  id="entry_1106057243">
+				</div>
+			</div>								
+		</fieldset>
+
+		<div class="form-actions">
+            <input type="submit" class="btn btn-primary" data-loading-text="Submitting..." name="submit" value="Submit">
+        </div>
+
+<!--
+		<input type="hidden" name="entry.1.single" id="entry_1" value="">
+		<input type="hidden" name="entry.2.single" id="entry_2" value="">
+!-->		
+	</form>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="js/mapbox.min.js"></script>
+<script src="js/mapbox-googledocs.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-timepicker.min.js"></script>
+<script type="text/javascript" src="js/jquery.jqgoogleforms.min.js"></script>
+<script src="js/form.js"></script>
+</body>
+</html>
