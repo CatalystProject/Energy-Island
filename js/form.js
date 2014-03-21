@@ -57,7 +57,12 @@ value: 2.5,
     // Set up date pickers
     var now = new Date();
     now = now.getDate() + '/' + (now.getMonth()+1) + '/' +  now.getFullYear();
-    $('#entry_284647925').val(now).datepicker({format:'dd/mm/yyyy'});
+    
+    
+
+    $('#entry_284647925').val(now).datepicker({onRender: function(date) {
+    	return date.valueOf() > now.valueOf() ? 'disabled' : '';
+    }, format:'dd/mm/yyyy'});
     /*$('#entry_574205951').timepicker({
                 minuteStep: 1,
                 template: 'modal',
