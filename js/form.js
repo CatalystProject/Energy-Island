@@ -133,7 +133,7 @@ value: 2.5,
                 //validate detector name field
                 var accepted = ["tesla", "electra", "watt", "volta", "steve", "amber"];
                 var dname = $(this).val();
-                var idee  = $(this).id;
+                var idee  = $(this).attr('id');
                 
                 if (idee === 'entry_1036124373' && !jQuery.inArray(dname,accepted)) {
                   $(this).parent().parent().addClass('error');
