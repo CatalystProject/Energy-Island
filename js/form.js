@@ -132,7 +132,7 @@ value: 2.5,
                 
                 //validate detector name field
                 var accepted = ["tesla", "elektra", "electra", "watt", "volta", "steve", "amber"];
-                var dname = $(this).val();
+                var dname = $(this).val().toLowerCase();
                 var idee  = $(this).attr('id');
                 
                 if ((idee === 'entry_1036124373') && (jQuery.inArray(dname,accepted) === -1)) {
