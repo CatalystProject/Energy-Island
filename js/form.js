@@ -60,9 +60,7 @@ value: 2.5,
     
     
 
-    $('#entry_284647925').val(now).datepicker({onRender: function(date) {
-    	return date.valueOf() > now.valueOf() ? 'disabled' : '';
-    }, format:'dd/mm/yyyy'});
+    $('#entry_284647925').val(now).datepicker({ endDate: 0, format:'dd/mm/yyyy' });
     /*$('#entry_574205951').timepicker({
                 minuteStep: 1,
                 template: 'modal',
