@@ -107,6 +107,7 @@ value: 2.5,
             });
             //button.button('reset');
         }
+        
 
         function validate(form) {
             $('.control-group').removeClass('error');
@@ -127,6 +128,12 @@ value: 2.5,
                     if ($(this).val() === '' && !$(this).parent().hasClass('radio')) {
                         $(this).parent().parent().addClass('error');
                     }
+                }
+                
+                //validate detector name field
+                var accepted = ["tesla", "electra", "watt", "volta", "steve", "amber"];
+                if ($(this).id === 'entry_1036124373' && !jQuery.inArray($(this).val(),accepted)) {
+                  $(this).parent().parent().addClass('error');
                 }
             });
 
