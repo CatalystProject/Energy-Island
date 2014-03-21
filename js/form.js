@@ -135,7 +135,7 @@ value: 2.5,
                 var dname = $(this).val();
                 var idee  = $(this).attr('id');
                 
-                if (idee === 'entry_1036124373' && !jQuery.inArray(dname,accepted)) {
+                if ((idee === 'entry_1036124373') && (jQuery.inArray(dname,accepted) === -1)) {
                   $(this).parent().parent().addClass('error');
                 }
             });
