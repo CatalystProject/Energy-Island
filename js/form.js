@@ -128,7 +128,7 @@ value: 2.5,
                 //dataType: "jsonp",
                 complete: function() {
                     button.button('reset');
-                    //top.window.location = 'heatmap/index.html#new';
+                    top.window.location = 'heatmap/index.html#new';
 
                     //console.log(data);
                 }
