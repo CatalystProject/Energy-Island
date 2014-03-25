@@ -78,7 +78,7 @@ value: 2.5,
 
 //$('#entry_574205951').timepicker({minuteStep:1, template:'modal',appendWidgetTo:'body'});
     $('#fileform').submit(function(e) {
-    	
+    	console.log('fileform submit');
     	data = $(this).serialize();
     	 e.preventDefault();
     	 $.ajax({
@@ -100,7 +100,7 @@ value: 2.5,
 
     // Handle form submission
     $('#form1').submit(function(e) {
-    	
+    	console.log('form submit');
     	
     	//upload from file, put url into entry_1129984154 blank out file
     	 $("#fileform").submit();
