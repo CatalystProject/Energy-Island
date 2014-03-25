@@ -29,6 +29,8 @@ value: 2.5,
 
 
     var formUrl = 'https://docs.google.com/forms/d/1z1Jaif-HgxOMKROmNPXbRSVfSS0B-QCJbhM1RWWPwwo/formResponse';//'https://docs.google.com/a/developmentseed.org/spreadsheet/formResponse?formkey=dGdwaW1VUW5uY0FSMjF0RVZBVldLTUE6MQ';
+	var fileformurl = 'http://cs-vyv.lancs.ac.uk/catalyst/energyisland/';
+
 /*
     // Set up map
     var m = mapbox.map('map').addLayer(mapbox.layer().id('willsimm.hahfo0cc'));
@@ -75,10 +77,35 @@ value: 2.5,
 
 
 //$('#entry_574205951').timepicker({minuteStep:1, template:'modal',appendWidgetTo:'body'});
-    
+    $('#fileform').submit(function(e) {
+    	
+    	data = $(this).serialize();
+    	 e.preventDefault();
+    	 $.ajax({
+                type: 'POST',
+                url: fileformurl,
+                data: data,
+                //dataType: "jsonp",
+                complete: function(data) {
+                    //button.button('reset');
+                    //top.window.location = 'heatmap/index.html#new';
+
+                    console.log(data);
+                }
+   
+                
+            });
+    	 
+    });
 
     // Handle form submission
-    $('form').submit(function(e) {
+    $('#form1').submit(function(e) {
+    	
+    	
+    	//upload from file, put url into entry_1129984154 blank out file
+    	 $("#fileform").submit();
+    	
+    	
         var button = $('input[type=submit]', this),
             data = $(this).serialize();
             console.log(data);
@@ -101,7 +128,7 @@ value: 2.5,
                 //dataType: "jsonp",
                 complete: function() {
                     button.button('reset');
-                    top.window.location = 'heatmap/index.html#new';
+                    //top.window.location = 'heatmap/index.html#new';
 
                     //console.log(data);
                 }
