@@ -103,7 +103,7 @@ value: 2.5,
     	console.log('form submit');
     	
     	//upload from file, put url into entry_1129984154 blank out file
-    	 $("#fileform").submit();
+    	// $("#fileform").submit();
     	
     	
         var button = $('input[type=submit]', this),
