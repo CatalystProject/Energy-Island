@@ -72,9 +72,21 @@ background-color: white;
 		window.onload = function() { init() };
 
 		function init() {
-			Tabletop.init( { key: '0AozujDfh1xlMdFZtaWNxejcwX2htTFdBSlp5b09mNHc',
+			/*Tabletop.init( { key: '0AozujDfh1xlMdFZtaWNxejcwX2htTFdBSlp5b09mNHc',
                    callback: function(data, tabletop) { createMarkers(data) },
-                   simpleSheet: true } )
+                   simpleSheet: true } )*/
+
+      $.ajax({    //create an ajax request to load_page.php
+        type: "GET",
+        url: "http://cs-vyv.lancs.ac.uk/catalyst/energyisland/heatmapdata.php",             
+        dataType: "json",   //expect html to be returned                
+        success: function(response){                    
+            createMarkers(response); 
+            //alert(response);
+        }
+
+    });
+
 		}
 
 
@@ -83,10 +95,10 @@ background-color: white;
 			console.log(data);
 			for (var i = 0; i < data.length; i++) {
 				//console.log(data[i].timestamp);
-				var title = data[i].date;
-				var marker = L.marker(new L.LatLng(data[i].latitude, data[i].longitude), { title: title });
+				var title = data[i].readingdate;
+				var marker = L.marker(new L.LatLng(data[i].lat, data[i].lng), { title: title });
 				
-				marker.bindPopup('<div class="marker-title"><b>Observed: ' +  data[i].date.substring(1) + ' '+data[i].time+'</b></div>' + '<div class="marker-description-top">Wind: ' +  data[i].windspeed + ' <br> Solar: ' +  data[i].solarlevel + ' <br> Comment: ' +  data[i].description + '</div>');
+				marker.bindPopup('<div class="marker-title"><b>Observed: ' +  data[i].readingdate.substring(1) + ' '+data[i].time+'</b></div>' + '<div class="marker-description-top">Wind: ' +  data[i].wind + ' <br> Solar: ' +  data[i].solar + ' <br> Comment: ' +  data[i].comment + '<br/><img width="250" src="'+data[i].image+'"></div>');
 				markers.addLayer(marker);
 				
 				

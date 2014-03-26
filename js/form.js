@@ -28,8 +28,9 @@ value: 2.5,
     $( "#entry_394802251" ).val( $( "#solarslider" ).slider( "value" ) );
 
 
-    var formUrl = 'https://docs.google.com/forms/d/1z1Jaif-HgxOMKROmNPXbRSVfSS0B-QCJbhM1RWWPwwo/formResponse';//'https://docs.google.com/a/developmentseed.org/spreadsheet/formResponse?formkey=dGdwaW1VUW5uY0FSMjF0RVZBVldLTUE6MQ';
+    //var formUrl = 'https://docs.google.com/forms/d/1z1Jaif-HgxOMKROmNPXbRSVfSS0B-QCJbhM1RWWPwwo/formResponse';//'https://docs.google.com/a/developmentseed.org/spreadsheet/formResponse?formkey=dGdwaW1VUW5uY0FSMjF0RVZBVldLTUE6MQ';
 	var fileformurl = 'http://cs-vyv.lancs.ac.uk/catalyst/energyisland/';
+    var formUrl = 'http://cs-vyv.lancs.ac.uk/catalyst/energyisland/upload_file.php';
 
 /*
     // Set up map
@@ -86,11 +87,11 @@ value: 2.5,
                 url: fileformurl,
                 data: data,
                 //dataType: "jsonp",
-                complete: function(data) {
-                    //button.button('reset');
+                complete: function(response) {
+                    button.button('reset');
                     //top.window.location = 'heatmap/index.html#new';
 
-                    console.log(data);
+                    console.log(response);
                 }
    
                 
@@ -120,21 +121,41 @@ value: 2.5,
 //googleForm.sendFormData(data);
             
             
-            
-            $.ajax({
+            var formData = new FormData($(this)[0]);
+
+ $.ajax({
+        url: formUrl,
+        type: 'POST',
+        data: formData,
+        async: false,
+        success: function (data) {
+            alert(data)
+        },
+        cache: false,
+        contentType: false,
+        processData: false,
+                        complete: function(data) {
+                    button.button('reset');
+                    top.window.location = 'heatmap/index.html#new';
+
+                    console.log(data);
+                }
+    });
+
+            /*$.ajax({
                 type: 'POST',
                 url: formUrl,
                 data: data,
                 //dataType: "jsonp",
-                complete: function() {
+                complete: function(data) {
                     button.button('reset');
-                    top.window.location = 'heatmap/index.html#new';
+                    //top.window.location = 'heatmap/index.html#new';
 
-                    //console.log(data);
+                    console.log(data);
                 }
    
                 
-            });
+            });*/
             //button.button('reset');
         }
         
