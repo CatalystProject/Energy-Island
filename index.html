@@ -100,7 +100,7 @@ var popupformcontent = '<iframe src="form.html" width=400px height=400px  frameB
 			    	//L.marker([loca.lat, loca.lon],{icon: tilleyIcon}).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
 			    
 				if ((e.latlng.lat >= (loca.lat-0.004) && e.latlng.lat <= (loca.lat+0.004)) && (e.latlng.lng >= (loca.lon-0.004) && e.latlng.lng <= (loca.lon+0.004))) {
-					L.marker([loca.lat, loca.lon],{icon: tilleyIcon}).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
+					L.marker([e.latlng.lat, e.latlng.lng],{icon: tilleyIcon}).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
 					foundALocation = true;
 				}
 				//else { popup.setLatLng(e.latlng).setContent("<b>"+loca.name+" is not here!</b><br/> Try again!").openOn(map);
