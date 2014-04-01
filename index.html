@@ -86,18 +86,19 @@ var popupformcontent = '<iframe src="form.html" width=400px height=400px  frameB
 		function onMapClick(e) {
 			
 			
-			var locations = [['Tilley',2],[3,4],[5,6]];
-			var locations = {"locations": [
+			//JSON list of POI
+			var pointsOfInterest = {"locations": [
 				        {"name": "Tilley", "icon": "tilley.png", "lat": 56.535727438167584, "lon": -6.756131332397456},
 				        {"name": "The Maze", "icon": "dune.png","lat": 56.52279, "lon": -6.952651},
 				        {"name": "Balevullin Beach", "icon": "wave.png","lat": 56.493075, "lon": -6.978421}
 				    ]
 				};
 				
-				
-			for each 
-			
-				
+			pointsOfInterest.locations.forEach(function(loca) {
+			    console.log(entry);
+			    L.marker([loca.lat, loca.lon],{icon: tilleyIcon}).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
+			        
+			});	
 			
 			//Tilley
 			target_lat=56.535727438167584;
