@@ -84,26 +84,32 @@ var popupformcontent = '<iframe src="form.html" width=400px height=400px  frameB
 		});
 		
 		function onMapClick(e) {
-
+			
+			
+			var locations = [['Tilley',2],[3,4],[5,6]];
+			var locations = {"locations": [
+				        {"name": "Tilley", "icon": "tilley.png", "lat": 56.535727438167584, "lon": -6.756131332397456},
+				        {"name": "The Maze", "icon": "dune.png","lat": 56.52279, "lon": -6.952651},
+				        {"name": "Balevullin Beach", "icon": "wave.png","lat": 56.493075, "lon": -6.978421}
+				    ]
+				};
+				
+				
+			for each 
+			
+				
+			
+			//Tilley
 			target_lat=56.535727438167584;
-        	target_lon=-6.756131332397456;
+        		target_lon=-6.756131332397456;
 
 			if ((e.latlng.lat >= (target_lat-0.004) && e.latlng.lat <= (target_lat+0.004)) && (e.latlng.lng >= (target_lon-0.004) && e.latlng.lng <= (target_lon+0.004))) {
-
-						//popup.setLatLng(e.latlng).setContent("in").openOn(map);
-            			//$('#entry_1672423225').val("in");
 
             			L.marker([56.535727438167584, -6.756131332397456],{icon: tilleyIcon}).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
 			        }
 			        else { popup.setLatLng(e.latlng).setContent("<b>Tilley is not here!</b><br/> Try again!").openOn(map);
-			        //$('#entry_1672423225').val("out"); 
 			    	}
-			        //console.log();
-/*
-			popup
-				.setLatLng(e.latlng)
-				.setContent("You clicked the map at " + e.latlng.toString())
-				.openOn(map);*/
+
 		}
 
 		map.on('click', onMapClick);
