@@ -97,7 +97,7 @@ var popupformcontent = '<iframe src="form.html" width=400px height=400px  frameB
 				
 			pointsOfInterest.locations.forEach(function(loca) {
 			    //console.log(entry);
-			    	L.marker([loca.lat, loca.lon],{icon: tilleyIcon}).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
+			    	//L.marker([loca.lat, loca.lon],{icon: tilleyIcon}).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
 			    
 				if ((e.latlng.lat >= (loca.lat-0.004) && e.latlng.lat <= (loca.lat+0.004)) && (e.latlng.lng >= (loca.lon-0.004) && e.latlng.lng <= (loca.lon+0.004))) {
 					L.marker([loca.lat, loca.lon],{icon: tilleyIcon}).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
