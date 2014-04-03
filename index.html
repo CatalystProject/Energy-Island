@@ -45,9 +45,12 @@ background-color: white;
 	
 	<script src="leaflet-0.7.2/leaflet.js"></script>
 	<script>
-var popupformcontent = '<iframe src="form.html" width=400px height=400px  frameBorder="0" ></iframe>';
-		var map = L.map('map').setView([56.5007, -6.8805], 13);  
+		//iframe popup content
+		var popupformcontent = '<iframe src="form.html" width=400px height=400px  frameBorder="0" ></iframe>';
 
+		//add map, set to tiree view
+		var map = L.map('map').setView([56.5007, -6.8805], 13);  
+		//add our custom map tiles
 		L.tileLayer('http://{s}.tile.cloudmade.com/1D162E9F2DCA42C187DB33208932BFB6/997/256/{z}/{x}/{y}.png', {
 			maxZoom: 18,
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>, Energy Island by <a href="http://www.catalystproject.org.uk">Catalyst!</a>'
@@ -71,59 +74,83 @@ var popupformcontent = '<iframe src="form.html" width=400px height=400px  frameB
 
 		var popup = L.popup();
 
-		
-		var tilleyIcon = L.icon({
-			iconUrl: 'img/tilleyicon.png',
-			shadowUrl: 'img/tilleyshadow.png',
-
-			iconSize:     [58, 93], // size of the icon
-			shadowSize:   [70, 38], // size of the shadow
-			iconAnchor:   [36, 92], // point of the icon which will correspond to marker's location
-			shadowAnchor: [53, 37],  // the same for the shadow
-			popupAnchor:  [0, -55] // point from which the popup should open relative to the iconAnchor
-		});
-		
+		//map click callback fn
 		function onMapClick(e) {
 			
 			
-			//JSON list of POI
+			//JSON list of POI, could be DB driven
 			var pointsOfInterest = {"locations": [
-				        {"name": "Tilley", "icon": "tilley.png", "lat": 56.535727438167584, "lon": -6.756131332397456},
-				        {"name": "The Maze", "icon": "dune.png","lat": 56.52279, "lon": -6.952651},
-				        {"name": "Balevullin Beach", "icon": "wave.png","lat": 56.493075, "lon": -6.978421}
+				        {"name": "Tilley", "icon": {
+															iconUrl: 'img/tilleyicon.png',
+															shadowUrl: 'img/tilleyshadow.png',
+															iconSize:     [58, 93], // size of the icon
+															shadowSize:   [70, 38], // size of the shadow
+															iconAnchor:   [36, 92], // point of the icon which will correspond to marker's location
+															shadowAnchor: [53, 37],  // the same for the shadow
+															popupAnchor:  [0, -55] // point from which the popup should open relative to the iconAnchor
+														}, 
+														"lat": 56.535727438167584, 
+														"lon": -6.756131332397456},
+
+
+				        {"name": "The Maze", "icon": {
+															iconUrl: 'img/dune.png',
+															//shadowUrl: 'img/tilleyshadow.png',
+															iconSize:     [79, 36], // size of the icon
+															//shadowSize:   [70, 38], // size of the shadow
+															iconAnchor:   [40, 18], // point of the icon which will correspond to marker's location
+															//shadowAnchor: [53, 37],  // the same for the shadow
+															popupAnchor:  [0, -18] // point from which the popup should open relative to the iconAnchor
+														},
+														"lat": 56.493075, 
+														"lon": -6.978421},
+
+				        {"name": "Balevullin Beach", "icon": {
+															iconUrl: 'img/wave.png',
+															//shadowUrl: 'img/tilleyshadow.png',
+															iconSize:     [53, 40], // size of the icon
+															//shadowSize:   [70, 38], // size of the shadow
+															iconAnchor:   [26, 20], // point of the icon which will correspond to marker's location
+															//shadowAnchor: [53, 37],  // the same for the shadow
+															popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
+														},
+														"lat": 56.52279, 
+														"lon": -6.952651},
+
+				        {"name": "Hynish Centre", "icon": {
+															iconUrl: 'img/hynish.png',
+															shadowUrl: 'img/hynishshadow.png',
+															iconSize:     [22, 41], // size of the icon
+															shadowSize:   [39, 20], // size of the shadow
+															iconAnchor:   [11, 40], // point of the icon which will correspond to marker's location
+															shadowAnchor: [30, 19],  // the same for the shadow
+															popupAnchor:  [0, -38] // point from which the popup should open relative to the iconAnchor
+														},
+														"lat": 56.449000, 
+														"lon": -6.893481
+													}
 				    ]
 				};
+			//track if we've clicked in the right place
 			var foundALocation = false;
-				
+			
+			//step through POI and check if the click is within a boundry of the location	
 			pointsOfInterest.locations.forEach(function(loca) {
-			    //console.log(entry);
-			    	//L.marker([loca.lat, loca.lon],{icon: tilleyIcon}).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
+
 			    
 				if ((e.latlng.lat >= (loca.lat-0.004) && e.latlng.lat <= (loca.lat+0.004)) && (e.latlng.lng >= (loca.lon-0.004) && e.latlng.lng <= (loca.lon+0.004))) {
-					L.marker([e.latlng.lat, e.latlng.lng],{icon: tilleyIcon}).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
+					//add the marker
+					L.marker([e.latlng.lat, e.latlng.lng],{icon: L.icon(loca.icon)}).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
 					foundALocation = true;
 				}
-				//else { popup.setLatLng(e.latlng).setContent("<b>"+loca.name+" is not here!</b><br/> Try again!").openOn(map);
-				//}    
+  
 			});	
-			
+			//if we are outside the boundry tell the user
 			if (!foundALocation) { popup.setLatLng(e.latlng).setContent("<b>Nothing here!</b><br/> Try again!").openOn(map); }
-				//}    
-			/*
-			//Tilley
-			target_lat=56.535727438167584;
-        		target_lon=-6.756131332397456;
 
-			if ((e.latlng.lat >= (target_lat-0.004) && e.latlng.lat <= (target_lat+0.004)) && (e.latlng.lng >= (target_lon-0.004) && e.latlng.lng <= (target_lon+0.004))) {
-
-            			L.marker([56.535727438167584, -6.756131332397456],{icon: tilleyIcon}).addTo(map).bindPopup(popupformcontent,{'maxWidth':900}).openPopup();
-			        }
-			        else { popup.setLatLng(e.latlng).setContent("<b>Tilley is not here!</b><br/> Try again!").openOn(map);
-			    	}
-			    	*/
 
 		}
-
+		//add click listener to map with callback fn
 		map.on('click', onMapClick);
 
 	</script>
