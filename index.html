@@ -2,35 +2,38 @@
 <html>
 <head>
 	<title>Catalyst! Energy Island</title>
-
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-   <style>
-   html, body, #map {
-      height:100%;
-      width:100%;
-      padding:0px;
-      margin:0px;
-   } 
-   #overlay {
-   padding: 10px;
-	bottom: 50px;
-    height: 75px;
-    position: absolute;
-    right: 50px;
-    width: 550px;
-	opacity:0.9;
-filter:alpha(opacity=90); /* For IE8 and earlier */
-background-color: white;
-		}
-   </style>
-
-
 	<meta charset="utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="leaflet-0.7.2/leaflet.js"></script>
+	<script src="http://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>	
+
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="leaflet-0.7.2/leaflet.css" />
+	<style>
+		html, body, #map {
+			height:100%;
+			width:100%;
+			padding:0px;
+			margin:0px;
+		} 
+		#overlay {
+			padding: 10px;
+			bottom: 50px;
+			height: 75px;
+			position: absolute;
+			right: 50px;
+			width: 550px;
+			opacity:0.9;
+			filter:alpha(opacity=90); /* For IE8 and earlier */
+			background-color: white;
+		}
+	</style>
 	
 
-	<link rel="stylesheet" href="leaflet-0.7.2/leaflet.css" />
 </head>
 <body>
 	<div id="map" ></div>
@@ -43,7 +46,7 @@ background-color: white;
 	
 	</div>
 	
-	<script src="leaflet-0.7.2/leaflet.js"></script>
+	
 	<script>
 		//iframe popup content
 		var popupformcontent = '<iframe src="form.html" width=400px height=400px  frameBorder="0" ></iframe>';
@@ -152,6 +155,43 @@ background-color: white;
 		}
 		//add click listener to map with callback fn
 		map.on('click', onMapClick);
+
+
+
+
+		window.onload = function() { init() };
+
+		function init() {
+
+		      $.ajax({    //create an ajax request to grab data
+		        type: "GET",
+		        url: "http://cs-vyv.lancs.ac.uk/catalyst/energyisland/heatmapdata.php",             
+		        dataType: "json",   //expect html to be returned                
+		        success: function(response){                    
+		            createMarkers(response); 
+		            //alert(response);
+		        }
+
+		    });
+		}
+
+
+		function createMarkers(data){
+			var markers = L.markerClusterGroup();
+			//console.log(data);
+			for (var i = 0; i < data.length; i++) {
+				//console.log(data[i].timestamp);
+				var title = data[i].readingdate;
+				var marker = L.marker(new L.LatLng(data[i].lat, data[i].lng), { title: title });
+				
+				marker.bindPopup('<div class="marker-title"><b>Observed: ' +  data[i].readingdate.substring(1) + ' '+data[i].time+'</b></div>' + '<div class="marker-description-top">Wind: ' +  data[i].wind + ' <br> Solar: ' +  data[i].solar + ' <br> Comment: ' +  data[i].comment + '<br/><img width="250" src="'+data[i].image+'"></div>');
+				markers.addLayer(marker);
+				
+				
+			}
+			map.addLayer(markers);
+		}
+
 
 	</script>
 </body>
